@@ -5,7 +5,6 @@ from app.models import Message
 import time
 import asyncio
 
-# Создаем роутер
 router = APIRouter()
 def message_helper(message: dict) -> dict:
     message["_id"] = str(message["_id"])
@@ -17,7 +16,7 @@ async def create_message(message: Message):
     new_message = await messages_collection.insert_one(message_dict)
     created_message = await messages_collection.find_one({"_id": new_message.inserted_id})
 
-    return {"id": str(created_message["_id"])}  # Возвращаем только ID нового сообщения
+    return {"id": str(created_message["_id"])} 
 
 
 @router.get("/messages/{id}")
